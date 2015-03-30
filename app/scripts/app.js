@@ -16,7 +16,7 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
-        "leaflet-directive",
+        'leaflet-directive',
         'mailchimp'
     ])
     .config(function($routeProvider) {

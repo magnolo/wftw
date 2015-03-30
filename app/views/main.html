@@ -1,48 +1,49 @@
 <div id="field" ng-class="{'smallen': loading}" class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-xs-10 col-xs-offset-1">
   <div class="row text-center title">
-      <h1>Feel the world</h1>
+    <h1>Feel the world</h1>
   </div>
   <div class="row text-center">
-    <p class="description">das ist ein Tool bei dem man die Welt sieht wie sie ist</p>
+    <p class="description">Explore Earth
+      <br>Spot Problemsy
+      <br>Learn about Commitment</p>
   </div>
   <div class="row">
     <form name="MailchimpSubscriptionForm" ng-controller="MailchimpSubscriptionCtrl">
-  <div class="anim-left" ng-hide="mailchimp.result === 'success'">
-    <input class="hidden" type="hidden" ng-model="mailchimp.username" ng-init="mailchimp.username='wefeeltheword'">
-    <input class="hidden" type="hidden" ng-model="mailchimp.dc" ng-init="mailchimp.dc='us10'">
-    <input class="hidden" type="hidden" ng-model="mailchimp.u" ng-init="mailchimp.u='0acb9a4998ac88ff3f2e3a257'">
-    <input class="hidden" type="hidden" ng-model="mailchimp.id" ng-init="mailchimp.id='cdab5a9d12'">
- 
-    <div class="form-group form-styled">
-        <input type="email" class="form-control"name="EMAIL" ng-model="mailchimp.EMAIL" placeholder="Email address" required>
+      <div class="anim-left" ng-hide="mailchimp.result === 'success'">
+        <input class="hidden" type="hidden" ng-model="mailchimp.username" ng-init="mailchimp.username='wefeeltheword'">
+        <input class="hidden" type="hidden" ng-model="mailchimp.dc" ng-init="mailchimp.dc='us10'">
+        <input class="hidden" type="hidden" ng-model="mailchimp.u" ng-init="mailchimp.u='0acb9a4998ac88ff3f2e3a257'">
+        <input class="hidden" type="hidden" ng-model="mailchimp.id" ng-init="mailchimp.id='cdab5a9d12'">
+
+        <div class="form-group form-styled">
+          <input type="email" class="form-control" name="EMAIL" ng-model="mailchimp.EMAIL" placeholder="Email address" required>
+        </div>
+        <button ng-disabled="MailchimpSubscriptionForm.$invalid" ng-click="addSubscription(mailchimp)" type="submit" style="width:100%" class="btn btn-colored">Absenden</button>
+
       </div>
-      <button   ng-disabled="MailchimpSubscriptionForm.$invalid" ng-click="addSubscription(mailchimp)" type="submit" style="width:100%" class="btn btn-colored">Absenden</button>
-  
-  </div>
 
-  <!-- Show error message if MailChimp unsuccessfully added the email to the list. -->
-  <div class="anim-left colored text-center" style="margin: 1em;" ng-if="mailchimp.result === 'error'" ng-cloak>
-    <span ng-bind-html="mailchimp.errorMessage"></span>
-  </div>
-
-  <!-- Show success message if MailChimp returned successfully. -->
-  <div class="anim-left colored text-center" style="margin:0 1em;" ng-if="mailchimp.result === 'success'" ng-cloak>
-    <span ng-bind-html="mailchimp.successMessage"></span>
-  </div>
-</form>
-
-    </div>
-    <div class="row text-center social">
-        <small>Share it on </small>
-        <a href="#"><i class="colored fa fa-facebook"></i></a> 
-        <a href="#"><i class="colored fa fa-twitter"></i></a>
-    </div>
-      <div class="row text-center">
-       <a href="#/about">
-        <div class="full-rounded">
-         <i class="fa fa-info"></i>
+      <!-- Show error message if MailChimp unsuccessfully added the email to the list. -->
+      <div class="anim-left colored text-center" style="margin: 1em;" ng-if="mailchimp.result === 'error'" ng-cloak>
+        <span ng-bind-html="mailchimp.errorMessage"></span>
       </div>
-      </a>
-  </div>
-  </div>
 
+      <!-- Show success message if MailChimp returned successfully. -->
+      <div class="anim-left colored text-center" style="margin:0 1em;" ng-if="mailchimp.result === 'success'" ng-cloak>
+        <span ng-bind-html="mailchimp.successMessage"></span>
+      </div>
+    </form>
+
+  </div>
+  <!--<div class="row text-center social">
+    <small>Share it on </small>
+    <a href="#"><i class="colored fa fa-facebook"></i></a>
+    <a href="#"><i class="colored fa fa-twitter"></i></a>
+  </div>
+  <div class="row text-center">
+    <a href="#/about">
+      <div class="full-rounded">
+        <i class="fa fa-info"></i>
+      </div>
+    </a>
+  </div>-->
+</div>
