@@ -66,14 +66,14 @@ angular.module('ftwApp')
       title: 'Wheatpaste Grey'
     }];
     $scope.$watch('tile', function(newItem, oldItem) {
-      if (newItem == oldItem) {
+      if (newItem === oldItem) {
         return;
       }
       angular.forEach($scope.layers.baselayers, function(item, key) {
         delete $scope.layers.baselayers[key];
-      })
+      });
 
-      if (newItem == "base") {
+      if (newItem === 'base') {
 
         $scope.layers.baselayers.base = {
 
@@ -95,7 +95,7 @@ angular.module('ftwApp')
 
     });
     $scope.tile = 'magnolo.c0da1255';
-    $scope.url = 'http://api.tiles.mapbox.com/v4/' + $scope.tile + '/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFnbm9sbyIsImEiOiJuSFdUYkg4In0.5HOykKk0pNP1N3isfPQGTQ'
+    $scope.url = 'http://api.tiles.mapbox.com/v4/' + $scope.tile + '/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFnbm9sbyIsImEiOiJuSFdUYkg4In0.5HOykKk0pNP1N3isfPQGTQ';
     $scope.loading = false;
     $scope.layers = {
       baselayers: {

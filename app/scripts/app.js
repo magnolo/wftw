@@ -20,14 +20,14 @@ angular
     'leaflet-directive',
     'mailchimp'
   ])
-  .config(function($routeProvider, $stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
       .state('home', {
         url: '/',
         views: {
-          "main": {
+          'main': {
             templateUrl: 'views/main.html',
             controller: 'MainCtrl'
           }
@@ -36,7 +36,7 @@ angular
       .state('about', {
         url: '/about',
         views: {
-          "main": {
+          'main': {
             controller: 'AboutCtrl',
             templateUrl: 'views/about.html'
           }
@@ -44,14 +44,14 @@ angular
       }).state('ngos', {
         url: '/informationen-fuer-ngos',
         views: {
-          "main": {
+          'main': {
             templateUrl: 'views/ngos.html'
           }
         }
       }).state('companies', {
         url: '/informationen-für-companies',
         views: {
-          "main": {
+          'main': {
             templateUrl: 'views/companies.html'
           }
         }
