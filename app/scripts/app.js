@@ -9,27 +9,52 @@
  * Main module of the application.
  */
 angular
-    .module('ftwApp', [
-        'ngAnimate',
-        'ngCookies',
-        'ngResource',
-        'ngRoute',
-        'ngSanitize',
-        'ngTouch',
-        'leaflet-directive',
-        'mailchimp'
-    ])
-    .config(function($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'views/main.html',
-                controller: 'MainCtrl'
-            })
-            .when('/about', {
-                templateUrl: 'views/about.html',
-                controller: 'AboutCtrl'
-            })
-            .otherwise({
-                redirectTo: '/'
-            });
-    });
+  .module('ftwApp', [
+    'ngAnimate',
+    'ngCookies',
+    'ngResource',
+    'ngRoute',
+    'ngSanitize',
+    'ngTouch',
+    'ui.router',
+    'leaflet-directive',
+    'mailchimp'
+  ])
+  .config(function($routeProvider, $stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+      .state('home', {
+        url: '/',
+        views: {
+          "main": {
+            templateUrl: 'views/main.html',
+            controller: 'MainCtrl'
+          }
+        }
+      })
+      .state('about', {
+        url: '/about',
+        views: {
+          "main": {
+            controller: 'AboutCtrl',
+            templateUrl: 'views/about.html'
+          }
+        }
+      }).state('ngos', {
+        url: '/informationen-fuer-ngos',
+        views: {
+          "main": {
+            templateUrl: 'views/ngos.html'
+          }
+        }
+      }).state('companies', {
+        url: '/informationen-für-companies',
+        views: {
+          "main": {
+            templateUrl: 'views/companies.html'
+          }
+        }
+      });
+
+  });

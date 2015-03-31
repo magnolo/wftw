@@ -60,7 +60,11 @@ angular.module('ftwApp')
     }, {
       name: 'mapbox.high-contrast',
       title: 'High Contrast'
-    }, ];
+
+    }, {
+      name: 'magnolo.c0da1255',
+      title: 'Wheatpaste Grey'
+    }];
     $scope.$watch('tile', function(newItem, oldItem) {
       if (newItem == oldItem) {
         return;
@@ -90,14 +94,14 @@ angular.module('ftwApp')
 
 
     });
-    $scope.tile = 'mapbox.pencil';
+    $scope.tile = 'magnolo.c0da1255';
     $scope.url = 'http://api.tiles.mapbox.com/v4/' + $scope.tile + '/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFnbm9sbyIsImEiOiJuSFdUYkg4In0.5HOykKk0pNP1N3isfPQGTQ'
     $scope.loading = false;
     $scope.layers = {
       baselayers: {
         pencil: {
           url: $scope.url,
-          name: 'mapbox.pencil',
+          name: 'magnolo.c0da1255',
           type: 'xyz'
         }
       }
@@ -129,12 +133,14 @@ angular.module('ftwApp')
     $scope.destroy = function() {
       cancelAnimationFrame($scope.animationID);
     };
+    $scope.toX = Math.round(Math.random()) * 2 - 1;
+    $scope.toY = Math.round(Math.random()) * 2 - 1;
     $scope.animate = function() {
 
       leafletData.getMap('map').then(function(map) {
         $scope.map = map;
 
-        $scope.map.panBy([-1, -1], {
+        $scope.map.panBy([$scope.toX, $scope.toY], {
           animate: false,
           duration: 1,
           easeLinearity: 1,

@@ -2,12 +2,14 @@ $color: #520187;
 $border-width: 2px;
 $grey-color: #d0d0d0;
 .anim {
-  
+  width: 100%;
+  height: 100%;
 }
 .anim.ng-enter {
   animation: fromRight 0.5s both;
   -webkit-animation: fromRight 0.5s both;
   overflow: hidden;
+  position: fixed;
 }
 .anim.ng-staggerr {
   -webkit-animation-delay: 0.1s;
@@ -17,6 +19,7 @@ $grey-color: #d0d0d0;
   animation: toRight 0.5s both;
   -webkit-animation: toRight 0.5s both;
   overflow: hidden;
+  position: fixed;
 }
 @keyframes fromRight {
   from {
@@ -45,7 +48,7 @@ $grey-color: #d0d0d0;
   }
   to {
     opacity: 0;
-    transform: translateY(100%);
+    transform: translateY(-100%);
   }
 }
 @-webkit-keyframes toRight {
@@ -55,7 +58,7 @@ $grey-color: #d0d0d0;
   }
   to {
     opacity: 0;
-    -webkit-transform: translateY(100%);
+    -webkit-transform: translateY(-100%);
   }
 }
 .anim-left.ng-enter {
@@ -130,12 +133,33 @@ body {
   left: 0;
   z-index: -1;
   pointer-event: none;
-  opacity: 0.8;
+  opacity: 0.5;
+}
+a {
+  color: $color;
+  text-decoration: underline;
+  &:hover {
+    color: darken($color, 10);
+    text-decoration: none;
+  }
+}
+.page_header {
+  text-transform: uppercase;
+  margin-bottom: -5px;
+  margin-left: 15px;
+  line-height: 1em;
+}
+.backed {
+  background: rgba(255,255,255,0.9);
+  padding-bottom: 1em;
+  padding-top: 1em;
+  border: 2px solid $color;
 }
 .title {
   border: $border-width solid $color;
   color: $color;
   margin-bottom: 2em;
+  background-color: rgba(255,255,255,0.2);
   h1 {
     font-weight: 600;
     margin: 0.5em 0;
