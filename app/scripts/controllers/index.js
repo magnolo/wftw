@@ -8,14 +8,33 @@
  * Controller of the ftwApp
  */
 angular.module('ftwApp')
-  .controller('IndexCtrl', function($log, $resource, $timeout, $scope, leafletData) {
+  .controller('IndexCtrl', function($log, $resource, $window, $timeout, $scope, leafletData) {
     /* $scope.zoom = 16;
     $scope.center = {
         lat: 48.209206,
         lng: 16.372778,
         zoom: $scope.zoom
     };*/
-    $scope.til = [{
+
+    /*angular.element($window).on('resize', function() {
+      //$timeout(function() {
+      $scope.map.panBy([$scope.toX, $scope.toY], {
+        animate: true,
+        duration: 500,
+        easeLinearity: 1,
+        noMoveStart: true
+      });
+      //});
+    });*/
+    $scope.home = true;
+    $scope.$on('$stateChangeSuccess', function(event, toState) {
+      if (toState.name !== 'home') {
+        $scope.home = false;
+      } else {
+        $scope.home = true;
+      }
+    });
+    /*$scope.til = [{
       name: 'mapbox.pirates',
       title: 'Pirates'
     }, {
@@ -64,8 +83,8 @@ angular.module('ftwApp')
     }, {
       name: 'magnolo.c0da1255',
       title: 'Wheatpaste Grey'
-    }];
-    $scope.$watch('tile', function(newItem, oldItem) {
+    }];*/
+    /*$scope.$watch('tile', function(newItem, oldItem) {
       if (newItem === oldItem) {
         return;
       }
@@ -93,7 +112,7 @@ angular.module('ftwApp')
       }
 
 
-    });
+  });*/
     $scope.tile = 'magnolo.c0da1255';
     $scope.url = 'http://api.tiles.mapbox.com/v4/' + $scope.tile + '/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFnbm9sbyIsImEiOiJuSFdUYkg4In0.5HOykKk0pNP1N3isfPQGTQ';
     $scope.loading = false;
@@ -102,7 +121,10 @@ angular.module('ftwApp')
         pencil: {
           url: $scope.url,
           name: 'magnolo.c0da1255',
-          type: 'xyz'
+          type: 'xyz',
+          layerOptions: {
+            attribution: ''
+          }
         }
       }
     };
@@ -110,13 +132,15 @@ angular.module('ftwApp')
       center: {
         lat: 48.209206,
         lng: 16.372778,
-        zoom: 16
-      },
-      tiles: {
-        url: $scope.url,
-        //url: 'http://manfredwalder.at/wftw2/tileserver/rdtiles/{z}/{x}/{y}.png',
-        type: 'xyz'
+        zoom: 15
       }
+      /*,
+            tiles: {
+              url: $scope.url,
+              //url: 'http://manfredwalder.at/wftw2/tileserver/rdtiles/{z}/{x}/{y}.png',
+              type: 'xyz',
+              attribution: 'm'
+            }*/
 
     });
     angular.extend($scope, {
@@ -127,29 +151,45 @@ angular.module('ftwApp')
         scrollWheelZoom: false,
         doubleClickZoom: false,
         keyboard: false,
-        zoomControl: false
+        zoomControl: false,
+        attributionControl: false
       }
     });
     $scope.destroy = function() {
       cancelAnimationFrame($scope.animationID);
     };
-    $scope.toX = Math.round(Math.random()) * 2 - 1;
-    $scope.toY = Math.round(Math.random()) * 2 - 1;
+    $scope.toX = (Math.round(Math.random()) * 2 - 1); //* 10000;
+    $scope.toY = (Math.round(Math.random()) * 2 - 1); //* 10000;
     $scope.animate = function() {
 
       leafletData.getMap('map').then(function(map) {
         $scope.map = map;
+        /*$scope.map.on('resize', function(m) {
+          var that = this;
+          $timeout(function() {
+            that.center = {
+              lat: 48.209206,
+              lng: 16.372778,
+            };
+            that.panBy([$scope.toX, $scope.toY], {
+              animate: true,
+              duration: 500,
+              easeLinearity: 1,
+              noMoveStart: true
+            });
+          }, 350);
 
+        });*/
         $scope.map.panBy([$scope.toX, $scope.toY], {
           animate: false,
-          duration: 1,
+          duration: 0.1,
           easeLinearity: 1,
           noMoveStart: true
         });
         $scope.animationID = requestAnimationFrame(function() {
           $timeout(function() {
             $scope.animate();
-          });
+          }, 20);
         });
       });
 

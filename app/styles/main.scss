@@ -113,6 +113,65 @@ $grey-color: #d0d0d0;
     -webkit-transform: translateX(100%);
   }
 }
+.anim-top {
+  
+}
+.anim-top {
+  animation: fromTop 0.5s both;
+  -webkit-animation: fromTop 0.5s both;
+  overflow: hidden;
+  position: fixed;
+}
+.anim-top.ng-staggerr {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+.anim-top.ng-leave {
+  animation: toTop 0.5s both;
+  -webkit-animation: toTop 0.5s both;
+  overflow: hidden;
+  position: fixed;
+}
+@keyframes fromTop {
+  from {
+    opacity: 1;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes fromTop {
+  from {
+    opacity: 1;
+    -webkit-transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+}
+@keyframes toTop {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-100%);
+  }
+}
+@-webkit-keyframes toTop {
+  from {
+    opacity: 1;
+    -webkit-transform: translateY(0%);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(-100%);
+  }
+}
 html,
 body {
   margin: 0;
@@ -153,7 +212,16 @@ a {
   background: rgba(255,255,255,0.9);
   padding-bottom: 1em;
   padding-top: 1em;
+  position: relative;
   border: 2px solid $color;
+  .icon {
+    position: absolute;
+    height: 100%;
+    .fa {
+      font-size: 20em;
+      opacity: 0.2;
+    }
+  }
 }
 .title {
   border: $border-width solid $color;
@@ -173,6 +241,7 @@ a {
   margin: 1em;
   text-transform: uppercase;
   font-weight: 600;
+  text-align: center !important;
 }
 .form-styled {
   padding: 1em;
@@ -220,6 +289,31 @@ a {
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   justify-content: center;
+  &.sub {
+    padding-top: 50px;
+    .boxIt {
+      padding: 3% 20%;
+      @media screen and (max-width:768px) {
+        padding: 3% 5%;
+      }
+    }
+  }
+  p {
+    text-align: justify;
+    margin: 10px 0;
+  }
+  h3 {
+    font-size: 1.3em;
+  }
+  h4 {
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 1.3em;
+  }
+  h5 {
+    text-decoration: underline;
+    line-height: 1.3em;
+  }
 }
 .full-rounded {
   color: $color;
@@ -254,4 +348,113 @@ a {
   &.smallen{
     transform:scale(0.9);
   }*/
+  @media screen and (max-width:768px) {
+    h1 {
+      font-size: 32px;
+    }
+  }
+}
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255,255,255,0.3);
+  padding: 1em;
+  border-bottom: 2px solid $color;
+  .navbar-header {
+    a {
+      text-decoration: none;
+      font-size: 1.3em;
+      line-height: 1em;
+    }
+    .brand {
+      position: relative;
+      i {
+        font-size: 2em;
+        position: absolute;
+        left: -1em;
+        margin-top: -3px;
+      }
+    }
+  }
+  nav {
+    ul {
+      display: inline-block;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        display: inline;
+        &.active {
+          font-weight: 600;
+        }
+        a {
+          display: inline-block;
+          text-decoration: none;
+          padding: 0 1em;
+          line-height: 1.3em;
+          color: $color !important;
+          background-color: transparent;
+          transition: all 200ms ease-in-out;
+          -webkit-transition: all 200ms ease-in-out;
+          i {
+            display: none;
+          }
+          &:active,
+          &:focus {
+            color: $color;
+          }
+        }
+      }
+    }
+    @media screen and (max-width:768px) {
+      background: #fff;
+      border: 2px solid $color;
+      padding: 1em 0;
+      ul {
+        li {
+          width: 100%;
+          display: inline-block;
+          text-align: left;
+          font-size: 1.4em;
+          a {
+            width: 100%;
+            padding: 1em;
+            i {
+              display: inline-block;
+              width: 2em;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+  .navbar-toggle {
+    border-color: transparent;
+    border-radius: 0;
+    margin-top: -8px;
+    margin-right: 0;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $color;
+      .icon-bar {
+        background-color: #fff;
+      }
+    }
+  }
+  .navbar-toggle .icon-bar {
+    background-color: $color;
+  }
+  @media screen and (max-width:768px) {
+    background-color: transparent;
+    border-bottom: 0;
+    .navbar-header {
+      .brand {
+        display: none;
+      }
+    }
+  }
 }

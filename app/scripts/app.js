@@ -18,7 +18,9 @@ angular
     'ngTouch',
     'ui.router',
     'leaflet-directive',
-    'mailchimp'
+    'mailchimp',
+    'mgcrea.ngStrap.navbar',
+    'mgcrea.ngStrap.collapse'
   ])
   .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
