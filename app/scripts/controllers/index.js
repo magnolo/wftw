@@ -113,14 +113,14 @@ angular.module('ftwApp')
 
 
   });*/
-    $scope.tile = 'magnolo.c0da1255';
+    $scope.tile = 'mapbox.pencil';
     $scope.url = 'http://api.tiles.mapbox.com/v4/' + $scope.tile + '/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFnbm9sbyIsImEiOiJuSFdUYkg4In0.5HOykKk0pNP1N3isfPQGTQ';
     $scope.loading = false;
     $scope.layers = {
       baselayers: {
         pencil: {
           url: $scope.url,
-          name: 'magnolo.c0da1255',
+          name: 'mapbox.pencil',
           type: 'xyz',
           layerOptions: {
             attribution: ''
@@ -161,37 +161,38 @@ angular.module('ftwApp')
     $scope.toX = (Math.round(Math.random()) * 2 - 1); //* 10000;
     $scope.toY = (Math.round(Math.random()) * 2 - 1); //* 10000;
     $scope.animate = function() {
+      if ($window.innerWidth >= 400) {
+        leafletData.getMap('map').then(function(map) {
+          $scope.map = map;
+          /*$scope.map.on('resize', function(m) {
+            var that = this;
+            $timeout(function() {
+              that.center = {
+                lat: 48.209206,
+                lng: 16.372778,
+              };
+              that.panBy([$scope.toX, $scope.toY], {
+                animate: true,
+                duration: 500,
+                easeLinearity: 1,
+                noMoveStart: true
+              });
+            }, 350);
 
-      leafletData.getMap('map').then(function(map) {
-        $scope.map = map;
-        /*$scope.map.on('resize', function(m) {
-          var that = this;
-          $timeout(function() {
-            that.center = {
-              lat: 48.209206,
-              lng: 16.372778,
-            };
-            that.panBy([$scope.toX, $scope.toY], {
-              animate: true,
-              duration: 500,
-              easeLinearity: 1,
-              noMoveStart: true
-            });
-          }, 350);
-
-        });*/
-        $scope.map.panBy([$scope.toX, $scope.toY], {
-          animate: false,
-          duration: 0.1,
-          easeLinearity: 1,
-          noMoveStart: true
+          });*/
+          $scope.map.panBy([$scope.toX, $scope.toY], {
+            animate: false,
+            duration: 0.1,
+            easeLinearity: 1,
+            noMoveStart: true
+          });
+          $scope.animationID = requestAnimationFrame(function() {
+            $timeout(function() {
+              $scope.animate();
+            }, 20);
+          });
         });
-        $scope.animationID = requestAnimationFrame(function() {
-          $timeout(function() {
-            $scope.animate();
-          }, 20);
-        });
-      });
+      }
 
     };
     $scope.sendReg = function() {

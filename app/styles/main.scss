@@ -1,25 +1,39 @@
-$color: #520187;
-$border-width: 2px;
+$color: #0071bc;
+$border-width: 3px;
 $grey-color: #d0d0d0;
+$dark-grey-color: #333;
+$time: 0.65s;
 .anim {
   width: 100%;
   height: 100%;
 }
 .anim.ng-enter {
-  animation: fromRight 0.5s both;
-  -webkit-animation: fromRight 0.5s both;
+  animation: fromRight $time both;
+  -webkit-animation: fromRight $time both;
   overflow: hidden;
-  position: fixed;
+  //position: fixed;
+  &.home {
+    position: fixed;
+    top: 0;
+    animation: scaleUp $time both;
+    -webkit-animation: scaleUp $time both;
+  }
 }
 .anim.ng-staggerr {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
 .anim.ng-leave {
-  animation: toRight 0.5s both;
-  -webkit-animation: toRight 0.5s both;
+  animation: toRight $time both;
+  -webkit-animation: toRight $time both;
   overflow: hidden;
   position: fixed;
+  top: 185px;
+  &.home {
+    top: 0;
+    animation: scaleDown $time*1.5 both;
+    -webkit-animation: scaleDown $time*1.5 both;
+  }
 }
 @keyframes fromRight {
   from {
@@ -48,7 +62,7 @@ $grey-color: #d0d0d0;
   }
   to {
     opacity: 0;
-    transform: translateY(-100%);
+    transform: translateY(100%);
   }
 }
 @-webkit-keyframes toRight {
@@ -58,7 +72,47 @@ $grey-color: #d0d0d0;
   }
   to {
     opacity: 0;
-    -webkit-transform: translateY(-100%);
+    -webkit-transform: translateY(100%);
+  }
+}
+@keyframes scaleDown {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+@-webkit-keyframes scaleDown {
+  from {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: scale(0);
+  }
+}
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes scaleUp {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
   }
 }
 .anim-left.ng-enter {
@@ -116,19 +170,18 @@ $grey-color: #d0d0d0;
 .anim-top {
   
 }
-.anim-top {
-  animation: fromTop 0.5s both;
-  -webkit-animation: fromTop 0.5s both;
+.anim-top.ng-enter {
+  animation: fromTop $time*0.8 both;
+  -webkit-animation: fromTop $time*0.8 both;
   overflow: hidden;
-  position: fixed;
 }
 .anim-top.ng-staggerr {
   -webkit-animation-delay: 0.1s;
   animation-delay: 0.1s;
 }
 .anim-top.ng-leave {
-  animation: toTop 0.5s both;
-  -webkit-animation: toTop 0.5s both;
+  animation: toTop $time*0.8 both;
+  -webkit-animation: toTop $time*0.8 both;
   overflow: hidden;
   position: fixed;
 }
@@ -180,6 +233,7 @@ body {
   height: 100%;
   font-family: 'Open Sans', sans-serif;
   color: #808080;
+  min-width: 320px;
 }
 .colored {
   color: $color;
@@ -213,7 +267,7 @@ a {
   padding-bottom: 1em;
   padding-top: 1em;
   position: relative;
-  border: 2px solid $color;
+  border-top: $border-width solid $color;
   .icon {
     position: absolute;
     height: 100%;
@@ -223,30 +277,39 @@ a {
     }
   }
 }
+.home {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
 .title {
   border: $border-width solid $color;
   color: $color;
   margin-bottom: 2em;
   background-color: rgba(255,255,255,0.2);
   h1 {
-    font-weight: 600;
+    font-weight: 400;
     margin: 0.5em 0;
+    @media screen and (max-width:360px) {
+      font-size: 2.1em;
+    }
   }
 }
 .description {
-  background: #fff;
+  background: rgba(255,255,255,0.8);
   border: $border-width solid $color;
   color: $color;
-  padding: 1em;
+  padding: 0.5em;
   margin: 1em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 1.4em;
+  line-height: 2em;
   text-align: center !important;
 }
 .form-styled {
   padding: 1em;
-  background: #fff;
-  border: 1px solid $grey-color;
   input.form-control {
     border-radius: 0;
     border-left: $border-width solid $color;
@@ -290,9 +353,35 @@ a {
   -webkit-justify-content: center;
   justify-content: center;
   &.sub {
-    padding-top: 50px;
+    min-height: 0;
+    display: inline-block;
+    h1 {
+      text-transform: uppercase;
+      font-size: 1.8em;
+      line-height: 1.8em;
+      span {
+        border-bottom: 2px solid;
+      }
+    }
     .boxIt {
-      padding: 3% 20%;
+      padding: 3% 10%;
+      p {
+        font-family: 'Georgia';
+        font-size: 18px;
+        color: $dark-grey-color;
+        .colored {
+          color: $color;
+        }
+      }
+      ul {
+        font-size: 18px;
+        font-family: 'Georgia';
+        padding: 0;
+        margin: 0;
+        li {
+          display: inline;
+        }
+      }
       @media screen and (max-width:768px) {
         padding: 3% 5%;
       }
@@ -301,14 +390,20 @@ a {
   p {
     text-align: justify;
     margin: 10px 0;
+    @media screen and (max-width:768px) {
+      text-align: left;
+    }
   }
   h3 {
     font-size: 1.3em;
   }
   h4 {
-    font-size: 1em;
-    font-weight: 600;
-    line-height: 1.3em;
+    font-size: 1.5em;
+    font-weight: 400;
+    line-height: 1.5em;
+    margin-bottom: 1.5em;
+    margin-top: 1.5em;
+    text-align: center;
   }
   h5 {
     text-decoration: underline;
@@ -317,8 +412,8 @@ a {
 }
 .full-rounded {
   color: $color;
-  font-size: 2em;
-  border: 2px solid $color;
+  font-size: 3em;
+  border: $border-width solid $color;
   border-radius: 100%;
   display: inline-block;
   height: 64px;
@@ -327,6 +422,10 @@ a {
   i {
     transition: all 200ms ease-in-out;
     -webkit-transition: all 200ms ease-in-out;
+    display: inline-block;
+    position: relative;
+    top: -10px;
+    left: -3px;
   }
   &:hover {
     i {
@@ -337,6 +436,7 @@ a {
 }
 .social {
   padding: 1.5em 0;
+  font-size: 1.3em;
   i {
     margin: 0 0.2em;
     font-size: 1.3em;
@@ -355,13 +455,12 @@ a {
   }
 }
 #header {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255,255,255,0.3);
+  background: transparent;
   padding: 1em;
-  border-bottom: 2px solid $color;
+  border-bottom: 0 solid $color;
   .navbar-header {
     a {
       text-decoration: none;
@@ -387,17 +486,24 @@ a {
       li {
         display: inline;
         &.active {
-          font-weight: 600;
+          a {
+            border-bottom: $border-width solid $color;
+          }
         }
         a {
-          display: inline-block;
-          text-decoration: none;
-          padding: 0 1em;
-          line-height: 1.3em;
           color: $color !important;
-          background-color: transparent;
           transition: all 200ms ease-in-out;
           -webkit-transition: all 200ms ease-in-out;
+          background-color: transparent;
+          display: inline-block;
+          line-height: 1.3em;
+          margin: 0 1.5em;
+          font-weight: 600;
+          text-decoration: none;
+          font-size: 1.2em;
+          @media screen and (max-width:400px) {
+            margin: 0 0.8em;
+          }
           i {
             display: none;
           }
@@ -408,7 +514,7 @@ a {
         }
       }
     }
-    @media screen and (max-width:768px) {
+    /*@media screen and (max-width:768px) {
       background: #fff;
       border: 2px solid $color;
       padding: 1em 0;
@@ -429,7 +535,7 @@ a {
           }
         }
       }
-    }
+    }*/
   }
   .navbar-toggle {
     border-color: transparent;
@@ -455,6 +561,15 @@ a {
       .brand {
         display: none;
       }
+    }
+  }
+}
+.footer {
+  a {
+    text-decoration: none;
+    border-bottom: 2px solid;
+    &:hover {
+      text-decoration: none;
     }
   }
 }
